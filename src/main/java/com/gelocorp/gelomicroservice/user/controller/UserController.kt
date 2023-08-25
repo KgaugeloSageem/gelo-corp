@@ -5,6 +5,7 @@ import com.gelocorp.gelomicroservice.user.model.User
 import com.gelocorp.gelomicroservice.user.model.response.UserRegistrationResponse
 import com.gelocorp.gelomicroservice.user.service.UserService
 import com.gelocorp.gelomicroservice.user.model.request.*
+import com.gelocorp.gelomicroservice.user.model.response.SignInResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.concurrent.ExecutionException
@@ -17,6 +18,11 @@ class UserController(private val userService: UserService)   {
     @PostMapping("/register")
     fun createUser( @RequestBody userRegistrationRequest: UserRegistrationRequest): UserRegistrationResponse {
         return userService.create(userRegistrationRequest)
+    }
+
+    @GetMapping("/signin")
+    fun signIn(@RequestBody signInUserRequest: SignInUserRequest): SignInResponse{
+        return userService.signIn(signInUserRequest)
     }
 
     @Throws(InterruptedException::class, ExecutionException::class)
